@@ -1,12 +1,17 @@
 import "./Home.css"
-import homeLogo from "../../../assets/amazonia.jpg"
-export const Home = () => {
-  return (
-    <>
-    <h1 className="titulo">Home</h1>
 
-    <img src= {homeLogo} className="img" alt="Imagem Tela Inicial" />
-    </>
-  )
+interface minhaProps {
+    title: string;
+    description: string;
+  }
+  
+function Home(props:minhaProps){
+    return (
+        <>
+        <h2>{props.title}</h2>
+        <p>{props.description}</p>
+        </>
+    );
 }
-export default Home
+
+export default Home;
