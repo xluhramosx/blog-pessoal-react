@@ -1,13 +1,15 @@
-import Home from "./assets/pages/home/Home"
-import './App.css';
-
+import "./App.css";
+import Home from "./assets/pages/home/Home" ;
+import NavBar from "./componentes/navBar/NavBar";
+import Footer from "./componentes/footer/Footer";
 
 function App() {
   return (
-   <Home  
-   title="Componente Home"
-   description="Este é um componente Home que recebe props."/>
-  );
+    <>
+    <NavBar/>
+    <Home/>
+    <Footer/>
+    </>
+);
 }
-
 export default App;
