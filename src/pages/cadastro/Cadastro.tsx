@@ -1,10 +1,14 @@
-import { useNavigate } from "react-router-dom"
-import "./Cadastro.css"
-import { ChangeEvent, useEffect, useState } from "react"
-import Usuario from "../../models/Usuario"
-import { cadastrarUsuario } from "../../services/Service"
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Usuario from '../../models/Usuario'
+import { cadastrarUsuario } from '../../services/Service'
+import './Cadastro.css'
+import { AuthContext } from '../../contexts/AuthContext'
+import { RotatingLines } from 'react-loader-spinner'
 
 function Cadastro() {
+
+  const [isLoading, setIsLoading] = useState(false)
 
   let navigate = useNavigate()
 
@@ -49,12 +53,13 @@ function Cadastro() {
 
   async function cadastrarNovoUsuario(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault()
-
+    setIsLoading(true)
     if (confirmaSenha === usuario.senha && usuario.senha.length >= 8) {
 
       try {
         await cadastrarUsuario(`/usuarios/cadastrar`, usuario, setUsuarioResposta)
         alert('Usuário cadastrado com sucesso')
+        setIsLoading(false)
 
       } catch (error) {
         alert('Erro ao cadastrar o Usuário')
@@ -66,7 +71,7 @@ function Cadastro() {
       setConfirmaSenha("")                  // Reinicia o campo de Confirmar Senha
     }
   }
-  
+
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-2 h-screen place-items-center font-bold">
@@ -134,12 +139,19 @@ function Cadastro() {
             />
           </div>
           <div className="flex justify-around w-full gap-8">
-            <button className="rounded text-white bg-red-500 hover:bg-red-700 w-1/2 py-2" >
+            <button className='rounded text-white bg-red-500 hover:bg-red-700 w-1/2 py-2' onClick={back}>
               Cancelar
             </button>
-            <button className="rounded text-white bg-violet-600 hover:bg-violet-800 w-1/2 py-2" type="submit">
-              Cadastrar
-            </button>
+            <button className='rounded text-white bg-violet-600 hover:bg-violet-800 w-1/2 py-2' type='submit'>
+            {isLoading ? <RotatingLines
+            strokeColor="white"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="24"
+            visible={true}
+          /> :
+            <span>Cadastrar</span>}
+             </button>
           </div>
         </form>
       </div>
