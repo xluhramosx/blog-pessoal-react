@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useState } from "react"
 
 import UsuarioLogin from "../models/UsuarioLogin"
-import {cadastrarUsuario } from "../services/Service"
+import {login } from "../services/Service"
 // import { toastAlerta } from "../utils/toastAlerta"
 
 interface AuthContextProps {
@@ -33,7 +33,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     async function handleLogin(userLogin: UsuarioLogin) {
         setIsLoading(true)
         try {
-            await cadastrarUsuario("/usuarios/logar", userLogin, setUsuario)
+            await login("/usuarios/logar", userLogin, setUsuario)
             alert("Usuário logado com sucesso")
             setIsLoading(false)
 
