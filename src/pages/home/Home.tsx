@@ -1,23 +1,34 @@
 import React, { useContext } from "react";
 
-import { UserContext } from "../../contexts/UserContext";
-import { Link, useNavigate } from "react-router-dom";
+import "./Home.css";
+import ListaPostagens from "../../componentes/postagem/listaPostagens/ListaPostagens";
 
 function Home() {
-  const { nome, setNome } = useContext(UserContext);
-
   return (
-    <div className="flex justify-center items-center">
-      <div>
-        <h2 className="text-slate-900 text-5xl  my-4">Logar</h2>
-        <h2 className="text-slate-900 text-4xl ">Ola user : {nome}</h2>
-        <Link to="/login" className="my-4 rounded bg-violet-400
-         hover:bg-violet-800 text-white w-1/2 py-2 flex justify-center">
-          Voltar 
-        </Link>
-      </div>
+    <>
+      <div className="bg-violet-900 flex justify-center">
+        <div className="container grid grid-cols-2 text-white">
+          <div className="flex flex-col gap-4 items-center justify-center py-4">
+            <h2 className="text-5xl font-bold">Seja bem vindo!</h2>
+            <p className="text-xl">Expresse aqui seus pensamentos e opniões</p>
 
-    </div>
+            <div className="flex justify-around gap-4">
+              <button className="rounded bg-white text-violet-800 py-2 px-4">
+                Ver postagens
+              </button>
+            </div>
+          </div>
+
+          <div className="flex justify-center ">
+            <img
+              src="https://img.freepik.com/vetores-gratis/cabeca-de-pantera-negra-com-raiva-assustadora_225004-1577.jpg?w=360&t=st=1708543490~exp=1708544090~hmac=40c3f6a586dc0d791b126d7bfdd3504a50b82bf92174ce8b994d7c727ac0e5a9"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+      <ListaPostagens />
+    </>
   );
 }
 
