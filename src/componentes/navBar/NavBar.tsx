@@ -17,10 +17,13 @@ function Navbar() {
 
   if (usuario.token !== "") {
     navbarComponent = (
-      <div className="w-full bg-violet-900 text-white flex justify-center py-4">
+      <div className="w-full bg-violet-900 text-violet-200 flex justify-center py-4">
         <div className="container flex justify-between text-lg">
-          <Link to="/home" className="text-2xl font-bold uppercase">
-            Blog Pessoal
+          <Link
+            to="/home"
+            className="text-2xl font-bold uppercase text-violet-200"
+          >
+            Blog da Dandara
           </Link>
 
           <div className="flex gap-4">
