@@ -1,15 +1,11 @@
-import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Usuario from "../../models/Usuario";
 import { cadastrarUsuario } from "../../services/Service";
 import "./Cadastro.css";
-import { AuthContext } from "../../contexts/AuthContext";
-import { RotatingLines } from "react-loader-spinner";
-import Spooky from "../../assets/spooky.gif";
+import { toastAlerta } from "../../util/toastAlerta";
 
 function Cadastro() {
-  const [isLoading, setIsLoading] = useState(false);
-
   let navigate = useNavigate();
 
   const [confirmaSenha, setConfirmaSenha] = useState<string>("");
@@ -53,7 +49,7 @@ function Cadastro() {
 
   async function cadastrarNovoUsuario(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
-    setIsLoading(true);
+
     if (confirmaSenha === usuario.senha && usuario.senha.length >= 8) {
       try {
         await cadastrarUsuario(
@@ -61,13 +57,15 @@ function Cadastro() {
           usuario,
           setUsuarioResposta
         );
-        alert("Usuário cadastrado com sucesso");
-        setIsLoading(false);
+        toastAlerta("Usuário cadastrado com sucesso", "sucesso");
       } catch (error) {
-        alert("Erro ao cadastrar o Usuário");
+        toastAlerta("Usuário cadastrado com sucesso", "sucesso");
       }
     } else {
-      alert("Dados inconsistentes. Verifique as informações de cadastro.");
+      toastAlerta(
+        "Dados inconsistentes. Verifique as informações de cadastro.",
+        "erro"
+      );
       setUsuario({ ...usuario, senha: "" }); // Reinicia o campo de Senha
       setConfirmaSenha(""); // Reinicia o campo de Confirmar Senha
     }
@@ -75,7 +73,7 @@ function Cadastro() {
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 h-screen place-items-center font-bold">
+      <div className="grid grid-cols-1 lg:grid-cols-2 h-screen place-items-center font-bold bg-violet-950">
         <div className="fundoCadastro hidden lg:block"></div>
         <form
           className="flex justify-center items-center flex-col w-2/3 gap-3"
@@ -89,7 +87,7 @@ function Cadastro() {
               id="nome"
               name="nome"
               placeholder="Nome"
-              className="border-2 border-slate-700 rounded p-2"
+              className="border-2 border-slate-900 rounded p-2"
               value={usuario.nome}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 atualizarEstado(e)
@@ -103,7 +101,7 @@ function Cadastro() {
               id="usuario"
               name="usuario"
               placeholder="Usuario"
-              className="border-2 border-slate-700 rounded p-2"
+              className="border-2 border-slate-900 rounded p-2"
               value={usuario.usuario}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 atualizarEstado(e)
@@ -117,7 +115,7 @@ function Cadastro() {
               id="foto"
               name="foto"
               placeholder="Foto"
-              className="border-2 border-slate-700 rounded p-2"
+              className="border-2 border-slate-900 rounded p-2"
               value={usuario.foto}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 atualizarEstado(e)
@@ -131,7 +129,7 @@ function Cadastro() {
               id="senha"
               name="senha"
               placeholder="Senha"
-              className="border-2 border-slate-700 rounded p-2"
+              className="border-2 border-slate-900 rounded p-2"
               value={usuario.senha}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 atualizarEstado(e)
@@ -145,7 +143,7 @@ function Cadastro() {
               id="confirmarSenha"
               name="confirmarSenha"
               placeholder="Confirmar Senha"
-              className="border-2 border-slate-700 rounded p-2"
+              className="border-2 border-slate-900 rounded p-2"
               value={confirmaSenha}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleConfirmarSenha(e)
@@ -160,14 +158,10 @@ function Cadastro() {
               Cancelar
             </button>
             <button
-              className="rounded text-white bg-violet-600 hover:bg-violet-800 w-1/2 py-2"
+              className="rounded text-white bg-violet-400 hover:bg-violet-900 w-1/2 py-2"
               type="submit"
             >
-              {isLoading ? (
-                <img src={Spooky} alt="" width="35px" />
-              ) : (
-                <span>Cadastrar</span>
-              )}
+              Cadastrar
             </button>
           </div>
         </form>

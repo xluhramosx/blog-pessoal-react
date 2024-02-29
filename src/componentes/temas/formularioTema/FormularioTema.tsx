@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Tema from "../../../models/Tema";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
+import { toastAlerta } from "../../../util/toastAlerta";
 
 function FormularioTema() {
   const [tema, setTema] = useState<Tema>({} as Tema);
@@ -52,10 +53,10 @@ function FormularioTema() {
         retornar();
       } catch (error: any) {
         if (error.toString().includes("403")) {
-          alert("O token expirou, favor logar novamente");
+          toastAlerta("O token expirou, favor logar novamente", "info");
           handleLogout();
         } else {
-          alert("Erro ao atualizar o Tema");
+          toastAlerta("Erro ao atualizar o Tema", "erro");
         }
       }
     } else {
@@ -92,7 +93,7 @@ function FormularioTema() {
   }, [token]);
 
   return (
-    <div className="container flex flex-col items-center justify-center mx-auto">
+    <div className="container flex flex-col items-center justify-center mx-auto ">
       <h1 className="text-4xl text-center my-8">
         {id === undefined ? "Cadastre um novo tema" : "Editar tema"}
       </h1>
@@ -110,7 +111,7 @@ function FormularioTema() {
           />
         </div>
         <button
-          className="rounded text-slate-100 bg-indigo-400 hover:bg-indigo-800 w-1/2 py-2 mx-auto block"
+          className="rounded text-slate-300 bg-violet-600 hover:bg-violet-800 w-1/2 py-2 mx-auto block"
           type="submit"
         >
           {id === undefined ? "Cadastrar" : "Editar"}

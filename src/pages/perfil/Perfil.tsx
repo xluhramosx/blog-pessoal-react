@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { toastAlerta } from "../../util/toastAlerta";
 function Perfil() {
   let navigate = useNavigate();
 
@@ -8,7 +9,10 @@ function Perfil() {
 
   useEffect(() => {
     if (usuario.token === "") {
-      alert("Você precisa estar logado");
+      toastAlerta(
+        "Dados inconsistentes. Verifique as informações de cadastro.",
+        "erro"
+      );
       navigate("/login");
     }
   }, [usuario.token]);
@@ -16,7 +20,7 @@ function Perfil() {
   return (
     <div className="container mx-auto mt-4 rounded-2xl overflow-hidden">
       <img
-        src="https://img.freepik.com/vetores-gratis/cabeca-de-pantera-negra-com-raiva-assustadora_225004-1577.jpg?w=360&t=st=1708543490~exp=1708544090~hmac=40c3f6a586dc0d791b126d7bfdd3504a50b82bf92174ce8b994d7c727ac0e5a9"
+        src="https://img.freepik.com/fotos-premium/computador-e-maos-fecham_566707-3684.jpg?w=740"
         alt=""
       />
       <img

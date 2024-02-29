@@ -1,8 +1,8 @@
 .fundoCadastro {
-  background-image: url("https://img.freepik.com/fotos-gratis/rea-de-transferencia-com-icone-ou-simbolo-de-nota-de-papel-de-lista-de-verificacao-na-renderizacao-3d-de-fundo-roxo_56104-1491.jpg?t=st=1708532326~exp=1708535926~hmac=bbce1009483dfbc753b9b809aa0f0b1575c3582abbc43553801076b247722b09&w=360");
-    background-repeat: no-repeat;
-    width: 100%;
-    min-height: 100vh;
-    background-size: cover;
-    background-position: center;
+  background-image: url("https://img.freepik.com/vetores-premium/preencha-a-tabela-de-dados-cadastrais_999616-375.jpg?w=360");
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 100vh;
+  background-size: 100%;
+  background-position: center;
 }
